@@ -5,10 +5,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 ## [Unreleased]
 
-### Added
-- Initial repo structure (4 tiers, commands, rules, templates, scripts, docs)
-- Plugin manifest (`.claude-plugin/plugin.json`)
-- Scripts: `validate.sh`, `add-skill.sh`, `sync-ui-docs.sh`, `install.sh`
+## [1.1.0] - 2026-04-15
+
+### Added (9 skills)
+
+01-aegisx-core (+6):
+- `aegisx-domain-architecture` — Master-data vs Operations + Layer (Core/Platform/Domains)
+- `aegisx-auth-rbac` — JWT, 8 accounts, preValidation hooks, role selection
+- `aegisx-schema-compilation` — `pnpm run build:schemas` workflow
+- `aegisx-multi-schema-db` — public / inventory / platform schemas
+- `aegisx-feature-docs` — `pnpm run docs:feature` folder-based workflow
+- `aegisx-common-patterns` — NEVER/ALWAYS/PREFER rules from learned sessions
+
+02-workflow (+3):
+- `worktree-workflow` — Parallel feature dev with git worktrees
+- `subtree-sync` — Shared libs sync (aegisx-cli/ui/mcp)
+- `production-deploy` — `production-install.sh --fresh` + Docker deploy
+
+Total: 53 skills (up from 44)
 
 ## [1.0.0] - 2026-04-15
 

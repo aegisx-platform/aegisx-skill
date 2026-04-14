@@ -1,0 +1,38 @@
+# Security Best Practices Skill
+
+## Quick Summary
+Comprehensive security guide for implementing secure APIs in the AegisX platform.
+
+## Use This Skill When:
+- Implementing authentication or authorization
+- Adding protected routes
+- Reviewing code for security vulnerabilities
+- Validating user input
+- Working with sensitive data
+- Implementing JWT authentication
+- Adding role-based or permission-based access control
+
+## What It Covers:
+- OWASP Top 10 Prevention (basics only)
+- TypeBox Validation Patterns
+- Fastify preValidation Hooks (CRITICAL: never throw errors)
+- Authentication & Authorization Patterns
+- Common Security Mistakes
+- Security Checklist
+
+## Critical Rules:
+1. NEVER throw errors in preValidation hooks (causes timeouts)
+2. ALWAYS use TypeBox schemas for input validation
+3. ALWAYS check authorization, not just authentication
+4. NEVER return sensitive data (passwords, tokens, hashes)
+
+## Files:
+- SKILL.md - Complete guide for Claude (881 lines)
+- README.md - Human-readable guide (440 lines)
+- REFERENCE.md - Quick reference & checklist (545 lines)
+
+## Example Usage:
+"Review this endpoint for security issues"
+"Add authentication to this route"
+"How do I implement role-based access control?"
+"What's the correct way to validate passwords?"

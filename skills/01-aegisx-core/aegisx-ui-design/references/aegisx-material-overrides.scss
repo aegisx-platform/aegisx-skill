@@ -1,0 +1,1019 @@
+// ============================================================================
+// AegisX Material Overrides — Untitled UI Design System
+// ============================================================================
+//
+// วิธีใช้:
+//   1) วางไฟล์นี้ที่ src/styles/aegisx-material-overrides.scss
+//   2) import ใน angular.json → styles: ["src/styles/aegisx-material-overrides.scss"]
+//      หรือ @import ใน styles.scss
+//   3) ไม่ต้อง override ที่ component level อีก — ไฟล์เดียวจบ
+//
+// อ้างอิง: Untitled UI React source (github.com/untitleduico/react)
+//          theme.css + component patterns
+//
+// ⚠️  Angular Material v3 (MDC-based) only
+// ============================================================================
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 0: CSS Custom Properties (Semantic Tokens)
+// ─────────────────────────────────────────────────────────────────────────────
+// Untitled UI ใช้ semantic tokens ไม่ใช้ raw color — ทำให้ dark mode flip ได้
+// เปลี่ยน hex ตรงนี้ที่เดียว ทั้งระบบเปลี่ยนหมด
+
+:root {
+  // ── Font ──
+  --aegis-font-body:
+    'IBM Plex Sans Thai', 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --aegis-font-mono:
+    ui-monospace, 'Roboto Mono', SFMono-Regular, Menlo, monospace;
+
+  // ── Primitive Colors (Untitled UI v6.0 gray scale) ──
+  --aegis-white: #ffffff;
+  --aegis-black: #000000;
+
+  --aegis-neutral-25: #fcfcfd;
+  --aegis-neutral-50: #f9fafb;
+  --aegis-neutral-100: #f2f4f7;
+  --aegis-neutral-200: #e4e7ec;
+  --aegis-neutral-300: #d0d5dd;
+  --aegis-neutral-400: #98a2b3;
+  --aegis-neutral-500: #667085;
+  --aegis-neutral-600: #475467;
+  --aegis-neutral-700: #344054;
+  --aegis-neutral-800: #182230;
+  --aegis-neutral-900: #101828;
+  --aegis-neutral-950: #0c111d;
+
+  // Brand (ปรับ hue ตาม AegisX brand identity)
+  --aegis-brand-50: #f9f5ff;
+  --aegis-brand-100: #f4ebff;
+  --aegis-brand-200: #e9d7fe;
+  --aegis-brand-300: #d6bbfb;
+  --aegis-brand-400: #b692f6;
+  --aegis-brand-500: #9e77ed;
+  --aegis-brand-600: #7f56d9;
+  --aegis-brand-700: #6941c6;
+  --aegis-brand-800: #53389e;
+  --aegis-brand-900: #42307d;
+  --aegis-brand-950: #2c1c5f;
+
+  // Error
+  --aegis-error-50: #fef3f2;
+  --aegis-error-100: #fee4e2;
+  --aegis-error-300: #fda29b;
+  --aegis-error-400: #f97066;
+  --aegis-error-500: #f04438;
+  --aegis-error-600: #d92d20;
+  --aegis-error-700: #b42318;
+
+  // Warning
+  --aegis-warning-50: #fffaeb;
+  --aegis-warning-100: #fef0c7;
+  --aegis-warning-300: #fec84b;
+  --aegis-warning-500: #f79009;
+  --aegis-warning-600: #dc6803;
+  --aegis-warning-700: #b54708;
+
+  // Success
+  --aegis-success-50: #ecfdf3;
+  --aegis-success-100: #d1fadf;
+  --aegis-success-300: #6ce9a6;
+  --aegis-success-500: #12b76a;
+  --aegis-success-600: #039855;
+  --aegis-success-700: #027a48;
+
+  // ── Semantic Tokens (role-based — matches Untitled UI theme.css) ──
+
+  // Text
+  --aegis-text-primary: var(--aegis-neutral-900);
+  --aegis-text-secondary: var(--aegis-neutral-700);
+  --aegis-text-secondary_hover: var(--aegis-neutral-800);
+  --aegis-text-tertiary: var(--aegis-neutral-600);
+  --aegis-text-tertiary_hover: var(--aegis-neutral-700);
+  --aegis-text-quaternary: var(--aegis-neutral-500);
+  --aegis-text-placeholder: var(--aegis-neutral-500);
+  --aegis-text-disabled: var(--aegis-neutral-400);
+  --aegis-text-brand-secondary: var(--aegis-brand-700);
+  --aegis-text-error-primary: var(--aegis-error-600);
+  --aegis-text-warning-primary: var(--aegis-warning-600);
+  --aegis-text-success-primary: var(--aegis-success-600);
+  --aegis-text-on-brand: var(--aegis-white);
+
+  // Background
+  --aegis-bg-primary: var(--aegis-white);
+  --aegis-bg-primary_hover: var(--aegis-neutral-50);
+  --aegis-bg-secondary: var(--aegis-neutral-50);
+  --aegis-bg-secondary_hover: var(--aegis-neutral-100);
+  --aegis-bg-tertiary: var(--aegis-neutral-100);
+  --aegis-bg-active: var(--aegis-neutral-50);
+  --aegis-bg-disabled: var(--aegis-neutral-50);
+  --aegis-bg-brand-solid: var(--aegis-brand-600);
+  --aegis-bg-brand-solid_hover: var(--aegis-brand-700);
+  --aegis-bg-brand-primary: var(--aegis-brand-50);
+  --aegis-bg-brand-secondary: var(--aegis-brand-100);
+  --aegis-bg-error-primary: var(--aegis-error-50);
+  --aegis-bg-error-solid: var(--aegis-error-600);
+  --aegis-bg-error-solid_hover: var(--aegis-error-700);
+  --aegis-bg-warning-primary: var(--aegis-warning-50);
+  --aegis-bg-success-primary: var(--aegis-success-50);
+  --aegis-bg-overlay: var(--aegis-neutral-950);
+
+  // Border
+  --aegis-border-primary: var(--aegis-neutral-300);
+  --aegis-border-secondary: var(--aegis-neutral-200);
+  --aegis-border-tertiary: var(--aegis-neutral-100);
+  --aegis-border-brand: var(--aegis-brand-500);
+  --aegis-border-error: var(--aegis-error-500);
+  --aegis-border-error_subtle: var(--aegis-error-300);
+
+  // Foreground (icons)
+  --aegis-fg-primary: var(--aegis-neutral-900);
+  --aegis-fg-secondary: var(--aegis-neutral-700);
+  --aegis-fg-tertiary: var(--aegis-neutral-600);
+  --aegis-fg-quaternary: var(--aegis-neutral-400);
+  --aegis-fg-quaternary_hover: var(--aegis-neutral-500);
+  --aegis-fg-brand-primary: var(--aegis-brand-600);
+  --aegis-fg-error-primary: var(--aegis-error-600);
+
+  // Focus ring
+  --aegis-focus-ring: var(--aegis-brand-500);
+  --aegis-focus-ring-error: var(--aegis-error-500);
+
+  // ── Shadows (exact values from Untitled UI theme.css) ──
+  --aegis-shadow-xs: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  --aegis-shadow-sm:
+    0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --aegis-shadow-md:
+    0px 4px 6px -1px rgba(0, 0, 0, 0.1), 0px 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --aegis-shadow-lg:
+    0px 12px 16px -4px rgba(0, 0, 0, 0.08),
+    0px 4px 6px -2px rgba(0, 0, 0, 0.03), 0px 2px 2px -1px rgba(0, 0, 0, 0.04);
+  --aegis-shadow-xl:
+    0px 20px 24px -4px rgba(0, 0, 0, 0.08),
+    0px 8px 8px -4px rgba(0, 0, 0, 0.03), 0px 3px 3px -1.5px rgba(0, 0, 0, 0.04);
+  --aegis-shadow-2xl:
+    0px 24px 48px -12px rgba(0, 0, 0, 0.18),
+    0px 4px 4px -2px rgba(0, 0, 0, 0.04);
+
+  // Skeuomorphic (Untitled UI signature button shadow)
+  --aegis-shadow-skeuomorphic:
+    0px 0px 0px 1px rgba(0, 0, 0, 0.18) inset,
+    0px -2px 0px 0px rgba(0, 0, 0, 0.05) inset;
+  --aegis-shadow-xs-skeuomorphic:
+    var(--aegis-shadow-skeuomorphic), var(--aegis-shadow-xs);
+
+  // ── Radius ──
+  --aegis-radius-xs: 2px;
+  --aegis-radius-sm: 4px;
+  --aegis-radius-md: 6px;
+  --aegis-radius-lg: 8px; // buttons, inputs
+  --aegis-radius-xl: 12px; // cards, modals, table card
+  --aegis-radius-full: 9999px; // badges, avatars
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 1: Global Resets
+// ─────────────────────────────────────────────────────────────────────────────
+// Material เพิ่ม letter-spacing, ripple, heavy shadows ทุก component
+// ฆ่าทิ้งรอบเดียวตรงนี้
+
+// 1a) Font family — ทุก Material component ใช้ IBM Plex Sans Thai
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab,
+.mat-mdc-icon-button,
+.mat-mdc-tab,
+.mat-mdc-chip,
+.mat-mdc-form-field,
+.mdc-text-field,
+.mat-mdc-dialog-title,
+.mat-mdc-dialog-content,
+.mat-mdc-card,
+.mat-mdc-card-title,
+.mat-mdc-header-cell,
+.mat-mdc-cell,
+.mat-mdc-snack-bar-container,
+.mat-mdc-menu-item,
+.mat-mdc-option,
+.mat-mdc-paginator,
+.mat-mdc-tooltip {
+  font-family: var(--aegis-font-body) !important;
+  letter-spacing: normal !important;
+}
+
+// 1b) Kill ALL ripples (Untitled UI ไม่ใช้ ripple effect)
+.mat-mdc-button-ripple,
+.mat-ripple,
+.mdc-button__ripple,
+.mdc-icon-button__ripple,
+.mdc-fab__ripple,
+.mdc-chip__ripple,
+.mat-mdc-button-persistent-ripple {
+  display: none !important;
+}
+
+// 1c) Kill Material default elevation on everything
+// (เราใส่ shadow เองตาม Untitled UI)
+.mat-elevation-z0,
+.mat-elevation-z1,
+.mat-elevation-z2,
+.mat-elevation-z3,
+.mat-elevation-z4,
+.mat-elevation-z5,
+.mat-elevation-z6,
+.mat-elevation-z7,
+.mat-elevation-z8,
+[class*='mat-elevation-z'] {
+  box-shadow: none !important;
+}
+
+// 1d) Global focus ring (Untitled UI pattern)
+*:focus-visible {
+  outline: 2px solid var(--aegis-focus-ring) !important;
+  outline-offset: 2px !important;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 2: Buttons
+// ─────────────────────────────────────────────────────────────────────────────
+// Untitled UI: rounded-lg, font-semibold, text-sm, skeuomorphic shadow
+// Material: rounded-md, font-weight 500, letter-spacing 0.0892857em 💀
+
+// 2a) Shared button base
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button {
+  border-radius: var(--aegis-radius-lg) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  min-height: 36px;
+  padding: 8px 12px !important;
+  transition: all 100ms ease-linear !important;
+
+  // Kill Material's weird min-width
+  min-width: unset !important;
+
+  // Disabled state
+  &[disabled] {
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
+  }
+}
+
+// 2b) Primary (filled) button
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button {
+  &.mat-primary,
+  &[color='primary'] {
+    background-color: var(--aegis-bg-brand-solid) !important;
+    color: var(--aegis-text-on-brand) !important;
+    box-shadow: var(--aegis-shadow-xs-skeuomorphic) !important;
+
+    // Inner white border gradient (Untitled UI signature)
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: calc(var(--aegis-radius-lg) - 1px);
+      mask-image: linear-gradient(to bottom, white, transparent);
+      pointer-events: none;
+    }
+
+    &:hover:not([disabled]) {
+      background-color: var(--aegis-bg-brand-solid_hover) !important;
+    }
+
+    .mat-icon {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    &:hover .mat-icon {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Warn/destructive
+  &.mat-warn,
+  &[color='warn'] {
+    background-color: var(--aegis-bg-error-solid) !important;
+    color: var(--aegis-text-on-brand) !important;
+    box-shadow: var(--aegis-shadow-xs-skeuomorphic) !important;
+
+    &:hover:not([disabled]) {
+      background-color: var(--aegis-bg-error-solid_hover) !important;
+    }
+  }
+}
+
+// 2c) Secondary (outlined/stroked) button
+.mat-mdc-outlined-button,
+.mat-mdc-button {
+  background-color: var(--aegis-bg-primary) !important;
+  color: var(--aegis-text-secondary) !important;
+  box-shadow: var(--aegis-shadow-xs-skeuomorphic) !important;
+  border: none !important;
+
+  // Untitled UI uses ring (inset box-shadow) instead of border
+  // to avoid layout shift
+  box-shadow:
+    inset 0 0 0 1px var(--aegis-border-primary),
+    var(--aegis-shadow-xs) !important;
+
+  &:hover:not([disabled]) {
+    background-color: var(--aegis-bg-primary_hover) !important;
+    color: var(--aegis-text-secondary_hover) !important;
+  }
+
+  .mat-icon {
+    color: var(--aegis-fg-quaternary);
+  }
+  &:hover .mat-icon {
+    color: var(--aegis-fg-quaternary_hover);
+  }
+}
+
+// 2d) Icon button
+.mat-mdc-icon-button {
+  border-radius: var(--aegis-radius-lg) !important;
+  color: var(--aegis-fg-quaternary) !important;
+  transition: all 100ms ease-linear !important;
+
+  &:hover:not([disabled]) {
+    background-color: var(--aegis-bg-primary_hover) !important;
+    color: var(--aegis-fg-quaternary_hover) !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 3: Form Fields / Inputs
+// ─────────────────────────────────────────────────────────────────────────────
+// Untitled UI: label above, rounded-lg, shadow-xs, ring-1 ring-primary
+// Material: floating label, heavy underline 💀, no shadow
+
+// 3a) Text field wrapper
+.mat-mdc-text-field-wrapper {
+  border-radius: var(--aegis-radius-lg) !important;
+  background-color: var(--aegis-bg-primary) !important;
+}
+
+// 3b) Outlined variant — the main input border
+.mdc-text-field--outlined {
+  .mdc-notched-outline {
+    .mdc-notched-outline__leading {
+      border-radius: var(--aegis-radius-lg) 0 0 var(--aegis-radius-lg) !important;
+      border-color: var(--aegis-border-primary) !important;
+    }
+    .mdc-notched-outline__trailing {
+      border-radius: 0 var(--aegis-radius-lg) var(--aegis-radius-lg) 0 !important;
+      border-color: var(--aegis-border-primary) !important;
+    }
+    .mdc-notched-outline__notch {
+      border-color: var(--aegis-border-primary) !important;
+    }
+  }
+
+  // Box shadow (Untitled UI adds subtle shadow to inputs)
+  box-shadow: var(--aegis-shadow-xs);
+}
+
+// 3c) Focus state — ring-2 ring-brand (Untitled UI pattern)
+.mat-mdc-form-field.mat-focused {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__notch {
+    border-color: var(--aegis-border-brand) !important;
+    border-width: 2px !important;
+  }
+  .mdc-text-field--outlined {
+    box-shadow: 0 0 0 4px var(--aegis-brand-100);
+  }
+}
+
+// 3d) Error state — ring-error (Untitled UI pattern)
+.mat-mdc-form-field.mat-form-field-invalid {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__notch {
+    border-color: var(--aegis-border-error_subtle) !important;
+  }
+
+  &.mat-focused {
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__trailing,
+    .mdc-notched-outline__notch {
+      border-color: var(--aegis-border-error) !important;
+      border-width: 2px !important;
+    }
+    .mdc-text-field--outlined {
+      box-shadow: 0 0 0 4px var(--aegis-error-100);
+    }
+  }
+}
+
+// 3e) Disabled state
+.mat-mdc-form-field.mat-form-field-disabled {
+  .mat-mdc-text-field-wrapper {
+    background-color: var(--aegis-bg-disabled) !important;
+    opacity: 0.5;
+  }
+}
+
+// 3f) Input text styles
+.mat-mdc-input-element {
+  font-size: 14px !important; // AegisX clinical density
+  line-height: 20px !important;
+  color: var(--aegis-text-primary) !important;
+
+  &::placeholder {
+    color: var(--aegis-text-placeholder) !important;
+  }
+}
+
+// 3g) Label — Untitled UI ใช้ label above (ไม่ floating)
+// ถ้าใช้ floatLabel="always" ใน mat-form-field:
+.mat-mdc-floating-label {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--aegis-text-secondary) !important;
+}
+
+// 3h) Hint / Error text
+.mat-mdc-form-field-hint {
+  font-size: 14px !important;
+  color: var(--aegis-text-tertiary) !important;
+}
+.mat-mdc-form-field-error {
+  font-size: 14px !important;
+  color: var(--aegis-text-error-primary) !important;
+}
+
+// 3i) Prefix/Suffix icons
+.mat-mdc-form-field-icon-prefix,
+.mat-mdc-form-field-icon-suffix {
+  color: var(--aegis-fg-quaternary) !important;
+}
+
+// 3j) Select (mat-select)
+.mat-mdc-select-value-text {
+  font-size: 14px !important;
+  color: var(--aegis-text-primary) !important;
+}
+.mat-mdc-select-placeholder {
+  color: var(--aegis-text-placeholder) !important;
+}
+.mat-mdc-select-arrow {
+  color: var(--aegis-fg-quaternary) !important;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 4: Cards
+// ─────────────────────────────────────────────────────────────────────────────
+// Untitled UI: rounded-xl, border-secondary, shadow-xs, NO heavy elevation
+// Material: mat-elevation-z1 (heavy shadow), rounded-4px 💀
+
+.mat-mdc-card {
+  border-radius: var(--aegis-radius-xl) !important;
+  border: 1px solid var(--aegis-border-secondary) !important;
+  box-shadow: var(--aegis-shadow-sm) !important;
+  background-color: var(--aegis-bg-primary) !important;
+  overflow: hidden;
+
+  // Hover elevation (optional — เปิดใช้ถ้าต้องการ)
+  // &:hover { box-shadow: var(--aegis-shadow-md) !important; }
+}
+
+.mat-mdc-card-header {
+  padding: 20px 24px !important;
+  border-bottom: 1px solid var(--aegis-border-secondary);
+}
+
+.mat-mdc-card-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 24px !important;
+  color: var(--aegis-text-primary) !important;
+}
+
+.mat-mdc-card-subtitle {
+  font-size: 14px !important;
+  color: var(--aegis-text-tertiary) !important;
+  margin-top: 4px !important;
+}
+
+.mat-mdc-card-content {
+  padding: 20px 24px !important;
+
+  // Remove Material's default top padding when card-content follows card-header
+  &:first-child {
+    padding-top: 20px !important;
+  }
+}
+
+.mat-mdc-card-actions {
+  padding: 16px 24px !important;
+  border-top: 1px solid var(--aegis-border-secondary);
+  background-color: var(--aegis-bg-secondary);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 5: Table
+// ─────────────────────────────────────────────────────────────────────────────
+// Untitled UI: text-xs header, text-sm body, border-secondary, hover bg
+// Material: weird padding, heavy borders, no hover by default
+
+.mat-mdc-table {
+  background: transparent !important;
+}
+
+// 5a) Header row
+.mat-mdc-header-row {
+  background-color: var(--aegis-bg-secondary) !important;
+  border-bottom: 1px solid var(--aegis-border-secondary) !important;
+  min-height: 44px !important;
+}
+
+// 5b) Header cell
+.mat-mdc-header-cell {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 18px !important;
+  color: var(--aegis-text-quaternary) !important;
+  padding: 12px 20px !important;
+  border-bottom: none !important; // border จัดการที่ row level
+  background: transparent !important;
+}
+
+// 5c) Body row
+.mat-mdc-row {
+  border-bottom: 1px solid var(--aegis-border-secondary) !important;
+  transition: background 100ms ease-linear;
+  min-height: 52px !important;
+
+  &:hover {
+    background-color: var(--aegis-bg-primary_hover) !important;
+  }
+
+  // Selected row
+  &.mat-mdc-row-selected,
+  &[aria-selected='true'] {
+    background-color: var(--aegis-bg-brand-primary) !important;
+  }
+
+  // Last row — no border
+  &:last-child {
+    border-bottom: none !important;
+  }
+}
+
+// 5d) Body cell
+.mat-mdc-cell {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  color: var(--aegis-text-tertiary) !important;
+  padding: 12px 20px !important;
+  border-bottom: none !important;
+}
+
+// 5e) Footer row (for paginator container)
+.mat-mdc-footer-row {
+  border-top: 1px solid var(--aegis-border-secondary) !important;
+  min-height: 52px !important;
+}
+
+// 5f) Sort header
+.mat-sort-header-content {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--aegis-text-quaternary) !important;
+  text-transform: none !important;
+}
+
+.mat-sort-header-arrow {
+  color: var(--aegis-fg-quaternary) !important;
+}
+
+// 5g) No data row
+.mat-mdc-no-data-row td {
+  padding: 48px 20px !important;
+  text-align: center;
+  color: var(--aegis-text-tertiary);
+  font-size: 14px;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 6: Paginator
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-paginator {
+  background: transparent !important;
+  border-top: 1px solid var(--aegis-border-secondary);
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  color: var(--aegis-text-tertiary) !important;
+
+  .mat-mdc-paginator-page-size-label {
+    font-size: 14px !important;
+    color: var(--aegis-text-tertiary) !important;
+  }
+
+  .mat-mdc-paginator-range-label {
+    font-size: 14px !important;
+    color: var(--aegis-text-tertiary) !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 7: Dialog / Modal
+// ─────────────────────────────────────────────────────────────────────────────
+// Untitled UI: rounded-xl, shadow-xl, subtle border
+// Material: rounded-4px, heavy shadow, weird padding 💀
+
+.mat-mdc-dialog-container {
+  .mdc-dialog__surface {
+    border-radius: var(--aegis-radius-xl) !important;
+    box-shadow: var(--aegis-shadow-xl) !important;
+    border: 1px solid var(--aegis-border-secondary);
+    overflow: hidden;
+  }
+}
+
+// Backdrop
+.cdk-overlay-dark-backdrop {
+  background: rgba(
+    16,
+    24,
+    40,
+    0.7
+  ) !important; // Untitled UI overlay: neutral-950 at 70%
+}
+
+.mat-mdc-dialog-title {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 28px !important;
+  color: var(--aegis-text-primary) !important;
+  padding: 24px 24px 0 !important;
+  margin: 0 !important;
+
+  &::before {
+    display: none !important;
+  } // Kill Material's ::before spacer
+}
+
+.mat-mdc-dialog-content {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  color: var(--aegis-text-tertiary) !important;
+  padding: 20px 24px !important;
+}
+
+.mat-mdc-dialog-actions {
+  padding: 0 24px 24px !important;
+  gap: 12px;
+  justify-content: flex-end !important;
+  min-height: unset !important;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 8: Menu / Dropdown
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-menu-panel {
+  border-radius: var(--aegis-radius-lg) !important;
+  box-shadow: var(--aegis-shadow-lg) !important;
+  border: 1px solid var(--aegis-border-secondary);
+  padding: 4px !important;
+  min-width: 180px !important;
+  background: var(--aegis-bg-primary) !important;
+}
+
+.mat-mdc-menu-item {
+  border-radius: var(--aegis-radius-md) !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  font-weight: 400 !important;
+  color: var(--aegis-text-secondary) !important;
+  min-height: 36px !important;
+  padding: 8px 10px !important;
+
+  &:hover:not([disabled]) {
+    background-color: var(--aegis-bg-primary_hover) !important;
+  }
+
+  .mat-icon {
+    color: var(--aegis-fg-quaternary) !important;
+    font-size: 16px !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 8px !important;
+  }
+}
+
+.mat-mdc-menu-item-text {
+  font-size: 14px !important;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 9: Tabs
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-tab-header {
+  border-bottom: 1px solid var(--aegis-border-secondary) !important;
+}
+
+.mat-mdc-tab {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  min-width: unset !important;
+  padding: 0 4px !important;
+  height: 44px !important;
+  color: var(--aegis-text-tertiary) !important;
+
+  &:hover {
+    color: var(--aegis-text-secondary_hover) !important;
+  }
+
+  // Active tab
+  &.mdc-tab--active {
+    color: var(--aegis-text-brand-secondary) !important;
+  }
+}
+
+// Active tab indicator
+.mdc-tab-indicator__content--underline {
+  border-color: var(--aegis-border-brand) !important;
+  border-top-width: 2px !important;
+  border-radius: 2px 2px 0 0;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 10: Checkbox
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-checkbox {
+  // Unchecked
+  .mdc-checkbox__background {
+    border-color: var(--aegis-border-primary) !important;
+    border-radius: var(--aegis-radius-sm) !important;
+    border-width: 1.5px !important;
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  // Checked
+  &.mat-mdc-checkbox-checked .mdc-checkbox__background {
+    background-color: var(--aegis-bg-brand-solid) !important;
+    border-color: var(--aegis-bg-brand-solid) !important;
+  }
+
+  // Focus ring
+  .mdc-checkbox__ripple {
+    display: none !important;
+  }
+
+  // Label
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--aegis-text-secondary);
+    margin-left: 8px;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 11: Radio Button
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-radio-button {
+  .mdc-radio__outer-circle {
+    border-color: var(--aegis-border-primary) !important;
+    border-width: 1.5px !important;
+  }
+
+  &.mat-mdc-radio-checked .mdc-radio__outer-circle {
+    border-color: var(--aegis-bg-brand-solid) !important;
+  }
+
+  .mdc-radio__inner-circle {
+    border-color: var(--aegis-bg-brand-solid) !important;
+  }
+
+  .mdc-radio__ripple {
+    display: none !important;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--aegis-text-secondary);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 12: Slide Toggle
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-slide-toggle {
+  // Track
+  .mdc-switch__track {
+    border-radius: var(--aegis-radius-full) !important;
+    background-color: var(--aegis-bg-tertiary) !important;
+    border: 1px solid var(--aegis-border-primary);
+    height: 20px !important;
+    width: 36px !important;
+  }
+
+  // Checked track
+  &.mat-mdc-slide-toggle-checked .mdc-switch__track {
+    background-color: var(--aegis-bg-brand-solid) !important;
+    border-color: var(--aegis-bg-brand-solid) !important;
+  }
+
+  // Handle (thumb)
+  .mdc-switch__handle {
+    border-radius: var(--aegis-radius-full) !important;
+    width: 16px !important;
+    height: 16px !important;
+
+    &::after {
+      background-color: var(--aegis-white) !important;
+    }
+  }
+
+  // Kill ripple
+  .mdc-switch__ripple {
+    display: none !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 13: Chips
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-chip {
+  border-radius: var(--aegis-radius-full) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 18px !important;
+  height: 24px !important;
+  background-color: var(--aegis-bg-secondary) !important;
+  border: 1px solid var(--aegis-border-secondary) !important;
+  color: var(--aegis-text-secondary) !important;
+
+  .mat-mdc-chip-action-label {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+  }
+
+  // Selected chip
+  &.mat-mdc-chip-selected {
+    background-color: var(--aegis-bg-brand-primary) !important;
+    border-color: var(--aegis-brand-200) !important;
+    color: var(--aegis-brand-700) !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 14: Snackbar / Toast
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-snack-bar-container {
+  border-radius: var(--aegis-radius-xl) !important;
+  box-shadow: var(--aegis-shadow-xl) !important;
+
+  .mdc-snackbar__surface {
+    border-radius: var(--aegis-radius-xl) !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 15: Tooltip
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-tooltip {
+  .mdc-tooltip__surface {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 18px !important;
+    padding: 8px 12px !important;
+    border-radius: var(--aegis-radius-lg) !important;
+    background-color: var(--aegis-neutral-900) !important;
+    color: var(--aegis-white) !important;
+    box-shadow: var(--aegis-shadow-lg) !important;
+    max-width: 320px !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 16: Progress Bar
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-progress-bar {
+  border-radius: var(--aegis-radius-full) !important;
+  height: 8px !important;
+
+  .mdc-linear-progress__bar-inner {
+    border-radius: var(--aegis-radius-full);
+    border-color: var(--aegis-bg-brand-solid) !important;
+  }
+
+  .mdc-linear-progress__buffer-bar {
+    background-color: var(--aegis-bg-tertiary) !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 17: Autocomplete / Option
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-mdc-autocomplete-panel,
+.mat-mdc-select-panel {
+  border-radius: var(--aegis-radius-lg) !important;
+  box-shadow: var(--aegis-shadow-lg) !important;
+  border: 1px solid var(--aegis-border-secondary);
+  padding: 4px !important;
+  background: var(--aegis-bg-primary) !important;
+}
+
+.mat-mdc-option {
+  font-size: 14px !important;
+  line-height: 20px !important;
+  min-height: 36px !important;
+  border-radius: var(--aegis-radius-md) !important;
+  padding: 8px 10px !important;
+  color: var(--aegis-text-secondary) !important;
+
+  &:hover:not(.mdc-list-item--disabled) {
+    background-color: var(--aegis-bg-primary_hover) !important;
+  }
+
+  &.mdc-list-item--selected:not(.mdc-list-item--disabled) {
+    background-color: var(--aegis-bg-active) !important;
+    color: var(--aegis-text-primary) !important;
+    font-weight: 500;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 18: Divider
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-divider {
+  border-top-color: var(--aegis-border-secondary) !important;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 19: Expansion Panel (Accordion)
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-expansion-panel {
+  border-radius: var(--aegis-radius-xl) !important;
+  border: 1px solid var(--aegis-border-secondary) !important;
+  box-shadow: none !important;
+  background: var(--aegis-bg-primary) !important;
+
+  &:not(:first-child) {
+    margin-top: -1px;
+  }
+
+  .mat-expansion-panel-header {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: var(--aegis-text-primary) !important;
+    padding: 16px 24px !important;
+    height: unset !important;
+
+    &:hover:not([aria-disabled='true']) {
+      background: var(--aegis-bg-primary_hover) !important;
+    }
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0 24px 20px !important;
+    font-size: 14px;
+    color: var(--aegis-text-tertiary);
+  }
+
+  .mat-expansion-indicator::after {
+    color: var(--aegis-fg-quaternary) !important;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION 20: Bottom Sheet
+// ─────────────────────────────────────────────────────────────────────────────
+
+.mat-bottom-sheet-container {
+  border-radius: var(--aegis-radius-xl) var(--aegis-radius-xl) 0 0 !important;
+  box-shadow: var(--aegis-shadow-xl) !important;
+  background: var(--aegis-bg-primary) !important;
+}

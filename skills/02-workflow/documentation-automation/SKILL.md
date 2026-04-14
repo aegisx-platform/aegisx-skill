@@ -1,3 +1,12 @@
+---
+name: documentation-automation
+version: 1.0.0
+description: >
+  Automatically generate and maintain project documentation from code comments, git commits,
+  and API versions. Use when setting up auto-generated docs, syncing README from code,
+  generating API docs from routes, or wiring git hooks to update documentation.
+---
+
 # Documentation Automation Skill
 
 > Automatically generate and maintain project documentation from code comments, git commits, and API versions.

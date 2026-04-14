@@ -5,6 +5,30 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-04-15
+
+### Changed (cleanup)
+- Merged `design-inspiration` → `aegisx-ui-design/references/design-inspiration.md`
+- Consolidated `test-ui` + `test-crud` + `test-form` → `test-workflows/` umbrella with progressive disclosure via `references/`
+
+### Removed
+- `04-meta/design-inspiration/` (moved to aegisx-ui-design references)
+- `02-workflow/test-ui/`, `test-crud/`, `test-form/` (folded into test-workflows)
+
+## [1.3.0] - 2026-04-15
+
+### Added (4 skills)
+
+01-aegisx-core (+1):
+- `aegisx-layout-migration` — ax-page-shell + --ax-* tokens migration
+
+02-workflow (+3):
+- `excel-import-patterns` — bulk Excel/CSV import with validation + progress
+- `websocket-events` — `--with-events` CRUD + real-time patterns
+- `chrome-mcp-testing` — Chrome MCP tool loading, dialog avoidance, standard patterns
+
+Total: 54 skills (up from 53 via merge + 4 new - 3 consolidated)
+
 ## [1.1.0] - 2026-04-15
 
 ### Added (9 skills)

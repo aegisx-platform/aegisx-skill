@@ -28,6 +28,15 @@ The patterns in this skill are inspired by [Untitled UI](https://www.untitledui.
 community), but the palette, tokens, and component anatomy have been adapted for the AegisX
 platform and its actual `@aegisx/ui` library shipped at `libs/aegisx-ui` in the monorepo.
 
+## Design Inspiration References (per-surface north-star)
+
+For picking a north-star brand for a specific surface (Linear for dashboards, Notion for docs,
+Cal for modals, etc.), see `references/design-inspiration.md`. Rules:
+- Pick ONE north-star per surface, not multiple
+- Use as **token/pattern** reference — NEVER clone brand identity 1:1
+- Update `libs/aegisx-ui/src/lib/styles/themes/_aegisx-tokens.scss` for global tokens
+- Compose `@aegisx/ui` components — don't rebuild primitives
+
 ## Design Tokens
 
 - **Gray scale** → **Tailwind Zinc** (`#fafafa` → `#09090b`)

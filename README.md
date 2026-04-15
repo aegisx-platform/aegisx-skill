@@ -11,7 +11,11 @@ AegisX is a full-stack enterprise application platform (Angular 17+ / Fastify / 
 ### Option A: As a Claude Code Plugin (recommended)
 
 ```bash
-/plugin install git@github.com:aegisx-platform/aegisx-skill.git
+# Step 1: Add the marketplace
+/plugin marketplace add aegisx-platform/aegisx-skill
+
+# Step 2: Install the plugin
+/plugin install aegisx-skill@aegisx-skill
 ```
 
 ### Option B: Git submodule in your AegisX project

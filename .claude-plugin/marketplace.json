@@ -1,0 +1,28 @@
+{
+  "name": "aegisx-skill",
+  "owner": {
+    "name": "AegisX Platform",
+    "url": "https://github.com/aegisx-platform"
+  },
+  "metadata": {
+    "description": "AegisX Platform skill marketplace — curated Claude Code skills for Angular + Fastify + PostgreSQL monorepo development",
+    "version": "1.4.0"
+  },
+  "plugins": [
+    {
+      "name": "aegisx-skill",
+      "source": "./",
+      "description": "61 curated skills, 10 commands, 7 rules for AegisX platform development",
+      "version": "1.4.0",
+      "category": "development",
+      "tags": [
+        "aegisx",
+        "angular",
+        "fastify",
+        "typescript",
+        "crud-generator",
+        "hospital-information-system"
+      ]
+    }
+  ]
+}

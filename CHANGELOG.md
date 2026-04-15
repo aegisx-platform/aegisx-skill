@@ -5,6 +5,19 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Sem
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-04-15
+
+### Added (7 ops skills to 02-workflow)
+- `db-backup` — PostgreSQL backup automation (main + domain schemas)
+- `db-restore` — Restore with safety checks
+- `disaster-recovery` — DR procedures for catastrophic failures
+- `monitor-health` — Service health + metrics + investigation
+- `performance-test` — k6 + Artillery load testing
+- `security-scan` — Dependency + vuln + SAST scanning
+- `deployment-workflow` — Staging/production deploy + tags/releases
+
+Total: 61 skills (up from 54)
+
 ## [1.2.0] - 2026-04-15
 
 ### Changed (cleanup)

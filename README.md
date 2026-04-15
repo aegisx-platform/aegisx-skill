@@ -37,14 +37,14 @@ ln -s ~/code/aegisx-skill/skills your-aegisx-project/.claude/skills/_aegisx
 
 ## What's Inside
 
-### Skills (42)
+### Skills (61)
 
 ```
 skills/
-├── 01-aegisx-core/        18  AegisX-specific — CRUD gen, UI library, icons, conventions
-├── 02-workflow/           10  Development workflow — testing, quality, security
+├── 01-aegisx-core/        27  AegisX-specific — CRUD gen, UI (design/library/types/icons), domain, auth
+├── 02-workflow/           21  Development workflow — testing, quality, deploy, ops, worktree, subtree
 ├── 03-curated/            12  Cherry-picked from ECC — postgres, API design, docker
-└── 04-meta/                2  Skills about skills — design inspiration, workflow recording
+└── 04-meta/                1  Skills about skills — workflow recording
 ```
 
 See [docs/STRUCTURE.md](docs/STRUCTURE.md) for the full index.

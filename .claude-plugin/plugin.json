@@ -1,6 +1,6 @@
 {
   "name": "aegisx-skill",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Curated Claude Code skills, commands, and rules for AegisX platform development — Angular + Fastify + PostgreSQL monorepo",
   "author": {
     "name": "AegisX Platform",

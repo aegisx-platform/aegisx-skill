@@ -1,6 +1,6 @@
 {
   "name": "aegisx-skill",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "Curated Claude Code skills, commands, and rules for AegisX platform development — Angular + Fastify + PostgreSQL monorepo",
   "author": {
     "name": "AegisX Platform",
@@ -8,10 +8,7 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/aegisx-platform/aegisx-skill",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:aegisx-platform/aegisx-skill.git"
-  },
+  "repository": "git@github.com:aegisx-platform/aegisx-skill.git",
   "keywords": [
     "aegisx",
     "angular",
@@ -19,8 +16,5 @@
     "typescript",
     "crud-generator",
     "hospital-information-system"
-  ],
-  "skills": "skills/**/",
-  "commands": "commands/",
-  "rules": "rules/"
+  ]
 }
